@@ -35,10 +35,7 @@ namespace DatingApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            .AddJsonOptions(opt => {
-                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
@@ -72,7 +69,7 @@ namespace DatingApp.API
                     if(error != null) 
                     await context.Response.WriteAsync(error.Error.Message);                
                 }));                     
-                //app.UseHsts();
+                app.UseHsts();
             }
 
             //app.UseHttpsRedirection();

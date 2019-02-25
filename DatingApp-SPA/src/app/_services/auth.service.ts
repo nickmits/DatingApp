@@ -2,18 +2,18 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  baseUrl = "http://localhost:5000/api/auth/";
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   constructor(private http: HttpClient) {}
 
   login(dataToSend: any) {
-    return this.http.post(this.baseUrl + "login", dataToSend).pipe(
+    return this.http.post(environment.apiUrlLogin, dataToSend).pipe(
       map((response: any) => {
         if (response) {
           localStorage.setItem("token", response.token);
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   register(dataToSend: any) {
-    return this.http.post(this.baseUrl + "register", dataToSend);
+    return this.http.post(environment.apiUrlRegister, dataToSend);
   }
 
   decodeToken(token: any){
