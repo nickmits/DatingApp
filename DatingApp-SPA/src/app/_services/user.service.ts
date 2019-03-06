@@ -20,6 +20,14 @@ export class UserService {
   }
 
   updateUser(id: number, user: User){
-    return this.http.put(environment.apiUrlUsers + 'users/' + id, user);
+    return this.http.put(environment.apiUrlUsers + id, user);
+  }
+
+  setMainPhoto(userId: number, id:number) {
+    return this.http.post(environment.apiUrlUsers + userId + '/photos' + id + '/setMain', {});
+  }
+
+  deletePhoto(userId: number, id: number){
+    return this.http.delete(environment.apiUrlUsers + userId + '/photos' + id);
   }
 }

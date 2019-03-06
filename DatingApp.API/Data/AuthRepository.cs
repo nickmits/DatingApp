@@ -18,7 +18,7 @@ namespace DatingApp.API.Data
         {
             try
             {
-                var user = await db.Users.FirstAsync(usr => usr.Username == username);
+                var user = await db.Users.Include(p => p.Photos).FirstAsync(usr => usr.Username == username);
                 VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt);
                 return user;
             }
