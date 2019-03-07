@@ -51,6 +51,7 @@ namespace DatingApp.API
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
                 .GetBytes(Configuration.GetSection("TokenSettings:Token").Value))
             });
+            services.AddScoped<LogUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
