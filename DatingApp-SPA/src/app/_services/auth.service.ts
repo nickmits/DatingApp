@@ -36,8 +36,8 @@ export class AuthService {
     );
   }
 
-  register(dataToSend: any) {
-    return this.http.post(environment.apiUrlRegister, dataToSend);
+  register(user: User) {
+    return this.http.post(environment.apiUrlRegister, user);
   }
 
   decodeToken(token: any){
